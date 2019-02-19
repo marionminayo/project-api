@@ -12,18 +12,17 @@ const storageEngine = multer.diskStorage({
 
   const uploadFile =  multer({
     storage: storageEngine,
-    limits: { fileSize:200000 },
+    limits: { fileSize:20000000 },
     fileFilter: function(req, file, callback){
       validateFile(file, callback);
     }
-  }).single('file');
+  }).single('body');
   
   
   const validateFile = function(file, cb ){
     allowedFileTypes = /pdf|docx|odt|txt/;
     const extension = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimeType  = allowedFileTypes.test(file.mimetype);
-    if(extension && mimeType){
+    if(extension){
       return cb(null, true);
     }else{
       cb("Invalid file type. Only pdf, txt and docx files are allowed.")
