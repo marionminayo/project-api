@@ -59,60 +59,18 @@ router.post('/newFile', function(req, res) {
   });    
 });
 
-/*
-router.post('/newFile', (req, res) => {
-  // Check if blog title was provided
-  if (!req.body.title) {
-    res.json({ success: false, message: 'file title is required.' }); // Return error message
-  } else {
-    // Check if blog body was provided
-    if (!req.body.body) {
-      res.json({ success: false, message: 'file body is required.' }); // Return error message
-    } else {
-      // Check if blog's creator was provided
-      if (!req.body.postedBy) {
-        res.json({ success: false, message: 'file creator is required.' }); // Return error
-      } else {
-        // Create the blog object for insertion into database
-        const blog = new File({
-          title: req.body.title, // Title field
-          body: req.body.body, // Body field
-          postedBy: req.body.postedBy // CreatedBy field
-        });
-        // Save blog into database
-        blog.save((err) => {
-          // Check if error
-          if (err) {
-            // Check if error is a validation error
-            if (err.errors) {
-              // Check if validation error is in the title field
-              if (err.errors.title) {
-                res.json({ success: false, message: err.errors.title.message }); // Return error message
-              } else {
-                // Check if validation error is in the body field
-                if (err.errors.body) {
-                  res.json({ success: false, message: err.errors.body.message }); // Return error message
-                } else {
-                  res.json({ success: false, message: err }); // Return general error message
-                }
-              }
-            } else {
-              res.json({ success: false, message: err }); // Return general error message
-            }
-          } else {
-            res.json({ success: true, message: 'Blog saved!' }); // Return success message
-          }
-        });
+router.get('/allFiles', (req,res)=>{
+  File.find({}, (err, files)=>{
+    if(err){
+      res.json({succes: false, message: err})
+    }else{
+      if(!files){
+        res.json({success: false, message: "no files found"})
+      }else{
+        res.json({success: true, files: files})
       }
     }
-  }
-})*/
+  }).sort({"_id": -1})
+})
+
 module.exports= router
-/*module.exports = (router) => {
-
-  /* ===============================================================
-     CREATE NEW BLOG
-  =============================================================== */
-  /*
-
-}*/
