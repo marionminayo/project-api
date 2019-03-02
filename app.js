@@ -8,6 +8,7 @@ const passport = require("passport")
 const config = require('./config/db').database
 const users = require('./routes/users')
 const files = require('./routes/files')
+const leaks = require('./routes/leaks') 
 
 const app = express()
 const port = 3000
@@ -40,6 +41,7 @@ require('./config/passport')(passport)
 
 app.use('/users', users)
 app.use('/files', files)
+app.use('/leaks', leaks)
 
 app.listen(port, ()=>{
     console.log("app started on port " +port)
