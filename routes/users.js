@@ -26,7 +26,7 @@ router.get('/profile', passport.authenticate('jwt', {session : false}), (req, re
     res.json({user : req.user})
 })
 
-router.get('/authenticate', (req, res, next)=>{
+router.post('/authenticate', (req, res, next)=>{
     const name = req.body.name
     const password = req.body.password
 

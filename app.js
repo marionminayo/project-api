@@ -7,9 +7,11 @@ const passport = require("passport")
 
 const config = require('./config/db').database
 const users = require('./routes/users')
+const files = require('./routes/files')
+const leaks = require('./routes/leaks') 
 
 const app = express()
-const port = 4000
+const port = 3000
 
 
 //mongo connection
@@ -26,9 +28,7 @@ app.use(cors())
 //set static folder for frontend
 app.use(express.static(path.join(__dirname, 'client')))
 
-app.get('/',(req,res)=>{
-    res.send('here huh')
-})
+
 
 //body-parser middleware
 app.use(bodyParser.json())
@@ -40,6 +40,8 @@ require('./config/passport')(passport)
 
 
 app.use('/users', users)
+app.use('/files', files)
+app.use('/leaks', leaks)
 
 app.listen(port, ()=>{
     console.log("app started on port " +port)
