@@ -1,0 +1,15 @@
+<div>
+    <mat-toolbar color="primary">
+        <span>{{title}}</span>
+      
+        <!-- This fills the remaining space of the current row -->
+        <span class="example-fill-remaining-space"></span>
+        <a routerLink="/" mat-button>Home</a> 
+        <a routerLink="/register" mat-button>Register</a>
+        <a routerLink="/login" mat-button>Login</a>
+        <a routerLink="/dashboard" mat-button>Dashboard</a>
+        <a (click)="onLogoutClick()" href="#" mat-button>Logout</a>
+    
+    </mat-toolbar>
+</div>
+
