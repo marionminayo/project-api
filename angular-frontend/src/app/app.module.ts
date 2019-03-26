@@ -4,9 +4,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +19,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ValidateService } from './services/validate.service'
 import { AuthService } from './services/auth.service';
-import { ProfileComponent } from './profile/profile.component'
+import { ProfileComponent } from './profile/profile.component';
+import { FilesService } from './services/files.service';
+
+
 
 @NgModule({
   declarations: [
@@ -39,9 +44,11 @@ import { ProfileComponent } from './profile/profile.component'
     FlexLayoutModule,
     FormsModule,
     FlashMessagesModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+
   ],
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, FilesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

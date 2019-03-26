@@ -1,0 +1,21 @@
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+.card{
+    margin: 1pc;
+    padding: 1pc ;
+    display: inline-block;
+    
+}
+.footer{
+    background-color: ghostwhite;
+}
+.list-group-item{
+    background-color: ghostwhite;
+    border-color: ghostwhite;
+    padding: 0%;
+    margin-top: 1pc
+    
+}

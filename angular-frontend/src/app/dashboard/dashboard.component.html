@@ -1,3 +1,73 @@
-<p>
-  dashboard works!
-</p>
+<h1 class="page-header">Exam Files</h1>
+
+<!-- <div class="row show-hide-message">
+  <div [ngClass]="message class">
+    {{ message }}
+  </div>
+</div> -->
+<div style="text-align:center">
+  <button type="button" name="button" class="btn btn-primary" *ngIf="!newPost" (click)="newFileForm()">New Exam File</button>
+  <div class="divider"></div>
+  <button [disabled]="loadingFiles" type="button" name="button" class="btn btn-secondary" *ngIf="!newPost" (click)="refreshFiles()">Refresh</button>
+</div>
+
+<!-- new file form -->
+<form name="fileForm" (submit)="onFileSubmit()" *ngIf="newPost" enctype='multipart/form-data'>
+  <!-- title input -->
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <div>
+      <input type="text" name="title"  [(ngModel)]="title" class="form-control" placeholder="Exam Title"  autocomplete="off">
+      
+    </div>
+  </div>
+  <!-- title input end-->
+
+  <!-- body input -->
+  <div class="form-group">
+      <label for="body">File:</label>
+      <div>
+        <input type="file" name="body"  class="form-control"  (change)="onFileChange($event)" placeholder="Choose file">
+        <!-- <input type="text" name="title" formControlName="title" class="form-control" placeholder="Exam Title"  autocomplete="off"> -->
+        
+      </div>
+  </div>
+  <!-- body input -->
+
+  <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Back</button>
+  <div class="divider"></div>
+  <button [disabled]="processing" type="submit" name="button" class="btn btn-success">Submit</button>
+</form>
+<!-- new file form -->
+
+
+
+<div *ngIf="!newPost" class="card" >
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Exam Title</h3>
+    </div>
+    <div class="panel-body">Minayo Went for a dssfghjdfghjkdxfcgvhbjertyu ssdfghjk sdfghjk ewasedgfhghj werdtfgyhuijtre 
+
+    </div>
+    <div class="panel-footer footer">
+      <p><strong>Posted by:</strong>Minayo</p>
+      <p><strong>Date:</strong>20-02-2019</p>
+      <a href="#"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
+      <div class="divider"></div>
+      <a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <button type="button" class="btn btn-sm btn-outline-success" (click)="addComment()">Post comment</button>
+        <!-- <form >
+          <textarea name="comment" class="form-control" cols="30" rows="10"></textarea>
+          <button type="button" name="button" class="btn btn-sm btn-info">Submit comment</button>
+          <div class="divider"></div>
+          <button type="button" name="button" class="btn btn-sm btn-danger">Cancel</button>
+        </form> -->
+      </li>
+    </ul>
+  </div>
+</div>
