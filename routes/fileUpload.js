@@ -1,8 +1,9 @@
 const multer = require('multer');
 const path   = require('path');
+// const t = require('../angular-frontend/src/assets/files')
 
 const storageEngine = multer.diskStorage({
-    destination: './public/files',
+    destination: './angular-frontend/src/assets/files',
     filename: function(req, file, fn){
       fn(null,  new Date().getTime().toString()+'-'+file.fieldname+path.extname(file.originalname));
     }

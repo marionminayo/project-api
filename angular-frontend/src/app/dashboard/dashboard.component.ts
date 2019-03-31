@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { FilesService } from '../services/files.service';
+import { Router } from '@angular/router';
+import { PdfService } from '../services/pdf.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +19,15 @@ export class DashboardComponent implements OnInit {
   processing= false;
   name;
   title: any;
+  filePosts;
+  path : any;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private fileService: FilesService) { 
+  constructor(private formBuilder: FormBuilder, 
+    private authService: AuthService, 
+    private fileService: FilesService,
+    private router:Router,
+    private pdfService : PdfService )
+    { 
     this.createNewFileForm();
   }
 
@@ -78,48 +87,34 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  getAllFiles(){
+    this.fileService.getAllFiles().subscribe((data: any) =>{
+      this.filePosts = data.files
+      
+      // this.filePosts.forEach(({ body, title }) => console.log(`${body} donuts cost $${title} each`));
+      
+    })
+  }
 
-
-  // onFileSubmit(){
-  //   this.(processing) = true; // Disable submit button
-  //   this.disableFormNewFileForm(); // Lock form
-
-  //   const file = {
-  //     title: this.form.get('title').value, // Title field
-  //     body: this.form.get('body').value, // Body field
-  //     createdBy: this.name // CreatedBy field
-  //   }
-  //   console.log(file)
-  //   this.fileService.newFile(file).subscribe((data:any)=>{
-  //     if(!data.success){
-  //       console.log(data.message)
-  //       this.messageClass= 'alert alert-danger';
-  //       this.message = data.message;
-  //       this.processing = false;
-  //       this.enableFormNewFileForm()
-  //     }else{
-  //       this.messageClass = 'alert alert-success';
-  //       this.message = data.message;
-  //       setTimeout(()=>{
-  //         this.newPost = false;
-  //         this.processing = false;
-  //         this.message = false;
-  //         this.form.reset();
-  //         this.enableFormNewFileForm();
-  //       },2000)
-  //     }
-  //   })
-  // }
 
   goBack(){
     window.location.reload();
   }
+  onClick(){
+    const pathFile = { path: this.path}
+    this.router.navigate(['pdf'])
+    
+    this.pdfService.setFile(pathFile)
+    
+  }
+  
 
   ngOnInit() {
     this.authService.getProfile().subscribe((profile: any)=>{
       this.name = profile.user.name;
       console.log(this.name)
     })
+    this.getAllFiles()
   }
 
 }

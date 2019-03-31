@@ -9,6 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 export class FilesService {
 
   file: any;
+  filePath: any;
+  path;
   constructor(private authService: AuthService, private http : HttpClient) { }
 
 
@@ -28,5 +30,20 @@ export class FilesService {
     return this.http.post('http://localhost:3000/files/newFile',data, httpOptions)
   }
 
+  getAllFiles(){
+    this.authService.loadToken()
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.authService.authToken
+      })
+    }
+    return this.http.get('http://localhost:3000/files/allFiles', httpOptions)
+  }
 
+
+  // pathy(){
+  //   this.setFilePath(this.filePath)
+  //   const path = this.filePath
+  // }
 }

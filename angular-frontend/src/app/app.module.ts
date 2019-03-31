@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer'
 
 
 
@@ -21,6 +22,7 @@ import { ValidateService } from './services/validate.service'
 import { AuthService } from './services/auth.service';
 import { ProfileComponent } from './profile/profile.component';
 import { FilesService } from './services/files.service';
+import { PdfComponent } from './pdf/pdf.component';
 
 
 
@@ -32,7 +34,8 @@ import { FilesService } from './services/files.service';
     RegisterComponent,
     NavbarComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    PdfComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { FilesService } from './services/files.service';
     FlashMessagesModule.forRoot(),
     HttpClientModule,
     ReactiveFormsModule,
+    PdfViewerModule
 
   ],
   providers: [ValidateService, AuthService, FilesService],

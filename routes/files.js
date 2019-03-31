@@ -30,7 +30,7 @@ router.post('/newFile', function(req, res) {
               postedBy: req.body.postedBy // CreatedBy field
             });
   
-                    // Save blog into database
+                    // Save file into database
             file.save((err) => {
               // Check if error
               if (err) {
@@ -51,7 +51,7 @@ router.post('/newFile', function(req, res) {
                   res.json({ success: false, message: err }); // Return general error message
                 }
               } else {
-                res.json({ success: true, message: 'Blog saved!' }); // Return success message
+                res.json({ success: true, message: 'file saved!',name :file. body }); // Return success message
               }
             })
       }
@@ -146,16 +146,16 @@ router.put('/updateFile', (req,res)=>{
   }
 })
 
-router.delete('/deleteBlog/:id', (req,res)=>{
+router.delete('/deletefile/:id', (req,res)=>{
   if(!req.params.id){
     res.json({success: false, message: 'No id was provided.'})
   }else{
-    Blog.findOne({_id: req.params.id}, (err, blog)=>{
+    file.findOne({_id: req.params.id}, (err, file)=>{
       if(err){
         res.json({success: false, message: 'Invalid id'})
       }else{
-        if(!blog){
-          res.json({success: false, message: 'Blog not found.'})
+        if(!file){
+          res.json({success: false, message: 'file not found.'})
         }else{
           User.findOne({_id: req.decoded.userId}, (err, user)=>{
             if(err){
@@ -205,11 +205,11 @@ router.post('/comment', (req,res)=>{
                 if(!user){
                   res.json({success: false, message: 'User not found.'})
                 }else{
-                  blog.comments.push({
+                  file.comments.push({
                     comment: req.body.comment,
                     commentBy: user.username
                   })
-                  blog.save((err)=>{
+                  file.save((err)=>{
                     if(err){
                       res.json({success: false, message: 'Something went wrong.'})
                     }else{
@@ -224,6 +224,11 @@ router.post('/comment', (req,res)=>{
       })
     }
   }
+})
+
+router.post('/download', (req,res,next)=>{
+  filepath = path.join(__dirname, "../public/files") +'/'+ nameF
+  res.sendFile(filepath)
 })
 
 module.exports= router

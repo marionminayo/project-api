@@ -42,20 +42,40 @@
 
 
 
-<div *ngIf="!newPost" class="card" >
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Exam Title</h3>
-    </div>
-    <div class="panel-body">Minayo Went for a dssfghjdfghjkdxfcgvhbjertyu ssdfghjk sdfghjk ewasedgfhghj werdtfgyhuijtre 
 
+
+
+<!-- for viewing files -->
+<div *ngIf="!newPost" class="card" >
+  <div class="panel panel-primary" *ngFor="let file of filePosts">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{file.title}}</h3>
+    </div>
+    <div class="panel-body"> 
+        
+      {{file.body}}
+      <!-- <form action="" (click)="onClick()">
+        <div>
+          <input type="text" name="pathFile" [(ngModel)]="path" value={{file.body}} disabled="disabled" class="form-control">
+        </div>
+        <button [disabled]="processing" type="submit" name="button" class="btn btn-success" >View File</button>
+      </form> -->
+      <form (submit)="onClick()">
+          <div class="form-group">
+            
+            <input type="text" [(ngModel)]="path" name="path" class="form-control">
+          </div>
+
+          <input type="submit" class="btn btn-outline-primary" value="View File">
+        </form>
     </div>
     <div class="panel-footer footer">
-      <p><strong>Posted by:</strong>Minayo</p>
-      <p><strong>Date:</strong>20-02-2019</p>
-      <a href="#"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
+      <p><strong>Posted by:</strong>{{file.postedBy}}</p>
+      <p><strong>Date:</strong>{{file.postedAt | date: 'MMM dd,yyyy'}}</p>
+      <a ><button type="button" name="button" class="btn btn-sm btn-info" *ngIf="name === file.postedBy">Edit</button></a>
       <div class="divider"></div>
-      <a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+      <a [routerLink]="['/delete-file/', file._id]"[routerLink]="['/edit-file/', file._id]" *ngIf="name === file.postedBy">
+        <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
     </div>
 
     <ul class="list-group">
